@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no/presentation/widgets/shared/audioRecorder.dart';
 
 class MessageFieldBox extends StatelessWidget {
   final ValueChanged<String> onValue;
@@ -15,17 +16,24 @@ class MessageFieldBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(40));
 
     final inputDecoration = InputDecoration(
-        hintText: 'Termina tu mensaje con "?"',
+        hintText: 'Ingresa un mensaje',
         enabledBorder: outlineInputBorder,
         focusedBorder: outlineInputBorder,
         filled: true,
-        suffixIcon: IconButton(
-          icon: const Icon(Icons.send_outlined),
-          onPressed: () {
-            final textValue = textController.value.text;
-            onValue( textValue );
-            textController.clear();
-          },
+        suffixIcon: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.send_outlined),
+              onPressed: () {
+                final textValue = textController.value.text;
+                onValue( textValue );
+                textController.clear();
+              },
+            ),
+             AudioRecorder( onValue2:  onValue)
+          ],
         ));
 
     return TextFormField(

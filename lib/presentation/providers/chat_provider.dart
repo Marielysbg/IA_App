@@ -1,40 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:yes_no/config/helpers/get_yes_no_answer.dart';
-import 'package:yes_no/domain/entities/message.dart';
+import 'package:yes_no/config/helpers/api_services.dart';
+import 'package:yes_no/infrastructure/models/chat_model.dart';
+
 
 class ChatProvider extends ChangeNotifier {
-  final ScrollController chatScrollController = ScrollController();
-  final GetYesNoAnswer getYesNoAnswer = GetYesNoAnswer();
+  final chatScrollController = ScrollController();
 
-  List<Message> messageList = [];
+  final ApiService apiService = ApiService();
+
+  List<ChatModel> messageList = [];
+
+  bool isTyping = false;
 
   Future<void> sendMessage(String text) async {
     if (text.isEmpty) return;
-    final newMessage = Message(text: text, fromWho: FromWho.me);
+   
+    final newMessage = ChatModel(msg: text, chatIndex: 1, fromWho: FromWho.me);
+   
     messageList.add(newMessage);
 
-    if (text.endsWith("?")) {
-      otherReply();
-    }
-
+    otherReply(text);
     notifyListeners();
     moveScrollToBottom();
+
   }
 
-  Future<void> otherReply() async {
-    final otherMessage = await getYesNoAnswer.getAnswer();
+  Future<void> otherReply(String text) async {
+
+    isTyping = true;
+    final otherMessage = await apiService.sendMessage(message: text);
+     isTyping = false;
     messageList.add(otherMessage);
     notifyListeners();
-
     moveScrollToBottom();
+
   }
 
-  Future<void> moveScrollToBottom() async {
-    await Future.delayed(const Duration(microseconds: 100));
+ Future<void> moveScrollToBottom() async {
+    await Future.delayed(const Duration(milliseconds: 100));
 
     chatScrollController.animateTo(
         chatScrollController.position.maxScrollExtent,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeOut);
   }
+  
 }
