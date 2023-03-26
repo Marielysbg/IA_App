@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yes_no/presentation/widgets/shared/audioRecorder.dart';
+import 'package:yes_no/presentation/widgets/shared/audio_recorder.dart';
 
 class MessageFieldBox extends StatelessWidget {
   final ValueChanged<String> onValue;

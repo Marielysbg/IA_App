@@ -10,7 +10,7 @@ class ApiService {
 
   final dio = Dio();
 
-  //send message
+  //Método para enviar mensaje del usuario al API
    Future<ChatModel> sendMessage({required String message}) async {
 
       try {
@@ -28,24 +28,19 @@ class ApiService {
                   }
               ));
 
-
+        //Parseamos la respuesta del api al model del chat
         final newMessage = ChatModel(msg: response.data['choices'][0]['message']["content"], chatIndex: 1, fromWho: FromWho.otherPerson);
-
          return newMessage;
-          
 
       } catch (error) {
         log("error1 $error");
         rethrow;
       }
-
   }
 
+  //Método Speech-to-text del api
    Future<String> sendRecord({required String path, required File file}) async {
-
       try {
-
-
             FormData formData = FormData.fromMap({
               "model": "whisper-1",
               "file": await MultipartFile.fromFile(path),
@@ -59,12 +54,10 @@ class ApiService {
             ));
 
             return response.data['text'];
-
       } catch (error) {
         log("error1 $error");
         rethrow;
       }
-
   }
 
 }

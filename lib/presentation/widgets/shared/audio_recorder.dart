@@ -1,15 +1,11 @@
-
 import 'dart:io';
 
 
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import 'package:provider/provider.dart';
 import 'package:yes_no/config/helpers/api_services.dart';
 import 'package:record_mp3/record_mp3.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:yes_no/presentation/providers/chat_provider.dart';
 
 class AudioRecorder extends StatefulWidget {
   final ValueChanged<String> onValue2;
@@ -21,6 +17,7 @@ class AudioRecorder extends StatefulWidget {
 
 class _AudioRecorderState extends State<AudioRecorder> {
 
+  //Instanciamos para obtener el método de speech-to-text
   ApiService apiService = ApiService();
   
 
@@ -28,22 +25,16 @@ class _AudioRecorderState extends State<AudioRecorder> {
   bool isComplete = false;
   bool buttonStatus = false;
 
-  
-
-
 
   @override
   Widget build(BuildContext context) {
-     final chatProvider = context.watch<ChatProvider>();
      
     return IconButton(
       onPressed: () async {
         if( buttonStatus ){
-           print('STOP recording');
           await stopRecord();
           await play();
         } else {
-          print('start recording');
           await startRecord();
         }
 
@@ -53,7 +44,7 @@ class _AudioRecorderState extends State<AudioRecorder> {
     );
   }
 
-
+    //Verificamos si el usuario aceptó los permisos para uso del micrófono
    Future<bool> checkPermission() async {
     if (!await Permission.microphone.isGranted) {
       PermissionStatus status = await Permission.microphone.request();
@@ -64,6 +55,7 @@ class _AudioRecorderState extends State<AudioRecorder> {
     return true;
   }
 
+  //Método que inicia la grabación del audio
   startRecord() async {
     bool hasPermission = await checkPermission();
     if (hasPermission) {
@@ -81,7 +73,7 @@ class _AudioRecorderState extends State<AudioRecorder> {
     setState(() {});
   }
 
-
+  //Método que finaliza la grabación del audio
   stopRecord() async {
     bool s = RecordMp3.instance.stop();
     if (s) {
@@ -90,19 +82,14 @@ class _AudioRecorderState extends State<AudioRecorder> {
       buttonStatus = false;
       setState(() {});
     }
-
-
-    print("path $recordFilePath");
-   
    
   }
 
 
   String recordFilePath = '';
-
-
   int i = 0;
 
+  //Método para crear el path del audio
   Future<String> getFilePath() async {
     Directory storageDirectory = await getApplicationDocumentsDirectory();
     String sdPath = storageDirectory.path + "/record";
@@ -114,9 +101,13 @@ class _AudioRecorderState extends State<AudioRecorder> {
     return sdPath + "/test_${i++}.mp3";
   }
 
+  //Método para enviar la grabación al api
    play() async{
     if (recordFilePath != '' && File(recordFilePath).existsSync()) {
+      //Obtenemos el path del audio grabado
       File file2 = File(recordFilePath);
+
+      //Se envia el path al API
        String response = await apiService.sendRecord(path: recordFilePath, file: file2);
         widget.onValue2(response);
     }
