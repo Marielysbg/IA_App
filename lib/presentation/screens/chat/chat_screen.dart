@@ -25,7 +25,7 @@ class ChatScreen extends StatelessWidget {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5j1QoysD2S9Mq32jDCO9ExkcKWP19RbcDxA&usqp=CAU"),
           ),
         ),
-        title: const Text("Joy", style: TextStyle(fontSize: 20)),
+        title: const Text("Bot", style: TextStyle(fontSize: 20)),
       ),
       body: _ChatView(),
     );
