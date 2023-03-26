@@ -37,6 +37,9 @@ class _ChatView extends StatelessWidget {
   Widget build(BuildContext context) {
     final chatProvider = context.watch<ChatProvider>();
      final colors = Theme.of(context).colorScheme;
+
+     chatProvider.signInAnonymously();
+     chatProvider.getChat();
     
 
     return SafeArea(

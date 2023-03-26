@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "43687398570",
+    "firebase_url": "https://aiapp-d77da-default-rtdb.firebaseio.com",
+    "project_id": "aiapp-d77da",
+    "storage_bucket": "aiapp-d77da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43687398570:android:15689687a58a8663fbd4d3",
+        "android_client_info": {
+          "package_name": "com.example.yes_no"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43687398570-45dc2072ohmohgo0n72lfmuc8ht7hiqm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXVGbmT2kVo570pI9vb5bBQNz9lu_-_cY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43687398570-45dc2072ohmohgo0n72lfmuc8ht7hiqm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

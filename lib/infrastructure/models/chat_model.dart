@@ -19,4 +19,10 @@ class ChatModel {
       fromWho: FromWho.otherPerson
     );
 
+    Map<String, Object?> toJson() => {
+      'msg': msg, 
+      'chatIndex': chatIndex,
+      'fromWho': fromWho.name
+    };
+
 }

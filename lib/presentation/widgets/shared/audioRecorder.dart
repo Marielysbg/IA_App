@@ -1,11 +1,10 @@
-import 'dart:async';
+
 import 'dart:io';
-import 'dart:typed_data';
+
 
 import 'package:flutter/material.dart';
-import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:path/path.dart' as path;
+
 import 'package:provider/provider.dart';
 import 'package:yes_no/config/helpers/api_services.dart';
 import 'package:record_mp3/record_mp3.dart';
@@ -98,22 +97,9 @@ class _AudioRecorderState extends State<AudioRecorder> {
    
   }
 
-  // void resumeRecord() {
-  //   bool s = RecordMp3.instance.resume();
-  //   if (s) {
-  //     statusText = "Recording...";
-  //     setState(() {});
-  //   }
-  // }
 
   String recordFilePath = '';
 
-  // void play() {
-  //   if (recordFilePath != null && File(recordFilePath).existsSync()) {
-  //     AudioPlayer audioPlayer = AudioPlayer();
-  //     audioPlayer.play(recordFilePath, isLocal: true);
-  //   }
-  // }
 
   int i = 0;
 

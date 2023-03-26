@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:yes_no/config/helpers/constants.dart';
-import 'package:http/http.dart' as http;
 import 'package:yes_no/infrastructure/models/chat_model.dart';
 
 class ApiService {
